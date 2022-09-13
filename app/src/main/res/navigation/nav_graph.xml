@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/login">
+    <fragment
+        android:id="@+id/login"
+        android:name="com.example.todoapp.ui.Login"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_login_to_signUp"
+            app:destination="@id/signUp"
+            app:popUpToInclusive="false" />
+        <action
+            android:id="@+id/action_login_to_details"
+            app:destination="@id/details"
+            app:popUpTo="@id/login"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_login_to_home2"
+            app:destination="@id/home2"
+            app:popUpTo="@id/login"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/signUp"
+        android:name="com.example.todoapp.ui.SignUp"
+        android:label="fragment_sign_up"
+        tools:layout="@layout/fragment_sign_up" >
+        <action
+            android:id="@+id/action_signUp_to_login"
+            app:destination="@id/login"
+            app:popUpTo="@id/login"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/details"
+        android:name="com.example.todoapp.ui.Details"
+        android:label="fragment_details"
+        tools:layout="@layout/fragment_details" >
+        <action
+            android:id="@+id/action_details_to_home2"
+            app:destination="@id/home2"
+            app:popUpTo="@id/details"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/home2"
+        android:name="com.example.todoapp.ui.Home"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_home2_to_addNewTask"
+            app:destination="@id/addNewTask" />
+    </fragment>
+    <fragment
+        android:id="@+id/addNewTask"
+        android:name="com.example.todoapp.ui.AddNewTask"
+        android:label="fragment_add_new_task"
+        tools:layout="@layout/fragment_add_new_task" >
+        <action
+            android:id="@+id/action_addNewTask_to_home2"
+            app:destination="@id/home2"
+            app:popUpTo="@id/home2"
+            app:popUpToInclusive="true" />
+    </fragment>
+</navigation>
