@@ -1,12 +1,14 @@
 package com.example.todoapp.ui
 
 import android.app.DatePickerDialog
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.findNavController
 import com.example.todoapp.R
 import com.example.todoapp.databinding.FragmentDetailsBinding
@@ -28,6 +30,10 @@ class Details : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         _binding = FragmentDetailsBinding.inflate(layoutInflater)
+
+        (requireActivity() as AppCompatActivity).supportActionBar?.title = "Details"
+        (requireActivity() as AppCompatActivity).supportActionBar?.setBackgroundDrawable(
+            ColorDrawable(getResources().getColor(R.color.purple_700)));
 
         binding.apply {
             saveDetails.setOnClickListener {

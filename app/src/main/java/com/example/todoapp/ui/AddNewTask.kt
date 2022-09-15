@@ -1,11 +1,13 @@
 package com.example.todoapp.ui
 
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.findNavController
 import com.example.todoapp.R
 import com.example.todoapp.databinding.FragmentAddNewTaskBinding
@@ -33,6 +35,10 @@ class AddNewTask : Fragment() {
         // Inflate the layout for this fragment
         _binding = FragmentAddNewTaskBinding.inflate(layoutInflater)
 
+        (requireActivity() as AppCompatActivity).supportActionBar?.title = "Add"
+        (requireActivity() as AppCompatActivity).supportActionBar?.setBackgroundDrawable(
+            ColorDrawable(getResources().getColor(R.color.purple_700)));
+
         binding.apply {
 
             AddTask.setOnClickListener {
@@ -43,17 +49,20 @@ class AddNewTask : Fragment() {
                         Toast.makeText(requireContext(),"Task cannot be empty",Toast.LENGTH_SHORT).show()
                     }
                     else -> {
-                        databaseReference = FirebaseDatabase.getInstance().getReference("TodoList").child(uId)
+                        databaseReference = FirebaseDatabase.getInstance().getReference("TodoList")
 
-                        val todoList = TodoList(task,description)
+                        val todoList = TodoList(task,description,uId)
 
                         val key = databaseReference.push().key!!
 
                         databaseReference.child(key).setValue(todoList).addOnCompleteListener {
-                            Toast.makeText(requireContext(),"Task Added Successfully",Toast.LENGTH_SHORT).show()
-                            findNavController().navigate(R.id.action_addNewTask_to_home2)
-                        }.addOnFailureListener{
-                            Toast.makeText(requireContext(),it.toString(),Toast.LENGTH_SHORT).show()
+                            if(it.isSuccessful){
+                                Toast.makeText(requireContext(),"Task Added Successfully",Toast.LENGTH_SHORT).show()
+                                /*findNavController().navigate(R.id.action_addNewTask_to_home2)*/
+                            }
+                            else {
+                                Toast.makeText(requireContext(),"Failed to add task",Toast.LENGTH_SHORT).show()
+                            }
                         }
                     }
                 }

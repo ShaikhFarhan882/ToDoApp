@@ -1,11 +1,11 @@
 package com.example.todoapp.ui
 
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.todoapp.R
@@ -35,6 +35,10 @@ class Home : Fragment() {
     ): View? {
         _binding = FragmentHomeBinding.inflate(layoutInflater)
 
+        (requireActivity() as AppCompatActivity).supportActionBar?.title = "UsersList"
+        (requireActivity() as AppCompatActivity).supportActionBar?.setBackgroundDrawable(
+            ColorDrawable(getResources().getColor(R.color.purple_700)));
+
         userList = arrayListOf<UserList>()
 
 
@@ -51,8 +55,30 @@ class Home : Fragment() {
 
 
 
+        setHasOptionsMenu(true)
         return binding.root
 
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.mymenu,menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+
+        when(item.itemId) {
+            R.id.logout -> {
+                logOutUser()
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+
+    private fun logOutUser(){
+        FirebaseAuth.getInstance().signOut()
+        findNavController().navigate(R.id.action_home2_to_login)
     }
 
 

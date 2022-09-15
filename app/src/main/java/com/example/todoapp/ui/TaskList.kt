@@ -1,13 +1,16 @@
 package com.example.todoapp.ui
 
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.todoapp.R
 import com.example.todoapp.adapter.TodoListAdapter
 import com.example.todoapp.databinding.FragmentTaskListBinding
 import com.example.todoapp.model.TodoList
@@ -38,6 +41,10 @@ class TaskList : Fragment() {
     ): View? {
        _binding = FragmentTaskListBinding.inflate(layoutInflater)
 
+        (requireActivity() as AppCompatActivity).supportActionBar?.title = "TaskList"
+        (requireActivity() as AppCompatActivity).supportActionBar?.setBackgroundDrawable(
+            ColorDrawable(getResources().getColor(R.color.purple_700)));
+
         val uId = args.userlist
 
         todolist = arrayListOf()
@@ -46,7 +53,7 @@ class TaskList : Fragment() {
         fun getUserTodoList(){
             databaseReference = FirebaseDatabase.getInstance().getReference("TodoList")
 
-            databaseReference.child(uId).addValueEventListener(object : ValueEventListener {
+            databaseReference.orderByChild("userId").equalTo(uId).addValueEventListener(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
                     if (snapshot.exists()) {
                         for (userSnapshot in snapshot.children) {
@@ -80,6 +87,9 @@ class TaskList : Fragment() {
             adapter = myadapter
         }
     }
+
+
+
 
 }
 

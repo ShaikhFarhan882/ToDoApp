@@ -57,6 +57,11 @@
         <action
             android:id="@+id/action_home2_to_taskList"
             app:destination="@id/taskList" />
+        <action
+            android:id="@+id/action_home2_to_login"
+            app:destination="@id/login"
+            app:popUpTo="@id/home2"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/addNewTask"
