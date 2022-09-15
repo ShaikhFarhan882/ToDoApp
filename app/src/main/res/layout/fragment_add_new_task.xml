@@ -36,7 +36,7 @@
             android:layout_marginTop="40dp"
             android:hint="Enter Title"
             android:background="@drawable/title_bg"
-            android:gravity="start|top"
+
             android:inputType="text"
             android:maxLength="70"
             android:maxLines="3"
@@ -64,7 +64,7 @@
             android:padding="15dp"
             android:textColor="@color/white"
             android:textColorHint="@color/white"
-            android:textSize="26sp"
+            android:textSize="24sp"
             android:background="@drawable/et_bg"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -83,7 +83,6 @@
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/Todo_Desc" />
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

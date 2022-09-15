@@ -36,7 +36,6 @@ class SignUp : Fragment() {
 
         binding.apply {
 
-
             btSignup.setOnClickListener {
                 val email = signUpEmail.text.toString()
                 val password = signUpPassword.text.toString()

@@ -37,7 +37,29 @@ class Details : Fragment() {
 
         binding.apply {
             saveDetails.setOnClickListener {
-                saveDetails()
+                val name = detailsName.text.toString()
+                val age = detailsAge.text.toString()
+                val dob = dateOfBirth.text.toString()
+                when{
+                    name.isEmpty() || age.isEmpty() || dob.isEmpty() ->{
+                        Toast.makeText(requireContext(),"Enter Details",Toast.LENGTH_SHORT).show()
+                    }
+
+                    else -> {
+                        val uId = FirebaseAuth.getInstance().currentUser!!.uid
+                        val userList = UserList(name,age,dob,uId)
+
+                        databaseReference.child(uId).setValue(userList).addOnCompleteListener {
+                            Toast.makeText(requireContext(),"Saved Successfully",Toast.LENGTH_SHORT).show()
+                            findNavController().navigate(R.id.action_details_to_home2)
+                        }.addOnFailureListener{
+                            Toast.makeText(requireContext(),it.toString(),Toast.LENGTH_SHORT).show()
+                        }
+
+                    }
+
+                }
+
             }
 
             dateOfBirth.setOnClickListener {
@@ -63,42 +85,22 @@ class Details : Fragment() {
                 datePickerDialog.show()
             }
         }
+
+
         return binding.root
     }
 
-    private fun saveDetails(){
-        val name = binding.detailsName.text.toString()
-        val age = binding.detailsAge.text.toString()
-        val dob = binding.dateOfBirth.text.toString()
 
-        when{
-            name.isEmpty() || age.isEmpty() || dob.isEmpty() ->{
-                Toast.makeText(requireContext(),"Enter Details",Toast.LENGTH_SHORT).show()
-            }
-
-
-            else -> {
-                val uId = FirebaseAuth.getInstance().currentUser!!.uid
-                val userList = UserList(name,age,dob,uId)
-
-                databaseReference.child(uId).setValue(userList).addOnCompleteListener {
-                    Toast.makeText(requireContext(),"Saved Successfully",Toast.LENGTH_SHORT).show()
-                    findNavController().navigate(R.id.action_details_to_home2)
-                }.addOnFailureListener{
-                    Toast.makeText(requireContext(),it.toString(),Toast.LENGTH_SHORT).show()
-                }
-
-            }
-
-        }
-
-
-    }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
+
+
+
+
+
 
 
 

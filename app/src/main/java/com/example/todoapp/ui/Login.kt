@@ -28,6 +28,15 @@ class Login : Fragment() {
         FirebaseDatabase.getInstance().getReference("Users")
 
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        val currentUser = FirebaseAuth.getInstance().currentUser
+        currentUser?.let {
+            findNavController().navigate(R.id.action_login_to_home2)
+        }
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
@@ -108,18 +117,21 @@ class Login : Fragment() {
             }
         }
 
+
+
         return binding.root
 
 
     }
 
-    override fun onStart() {
+ /*   override fun onStart() {
         super.onStart()
         val currentUser = FirebaseAuth.getInstance().currentUser
         currentUser?.let {
             findNavController().navigate(R.id.action_login_to_home2)
         }
-    }
+
+    }*/
 
 
     private fun ifUserExists() {

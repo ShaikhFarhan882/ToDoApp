@@ -29,6 +29,8 @@ class Home : Fragment() {
 
     private lateinit var userAdapter: UserAdapter
 
+    private val user : FirebaseUser? = FirebaseAuth.getInstance().currentUser
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
@@ -39,7 +41,9 @@ class Home : Fragment() {
         (requireActivity() as AppCompatActivity).supportActionBar?.setBackgroundDrawable(
             ColorDrawable(getResources().getColor(R.color.purple_700)));
 
-        userList = arrayListOf<UserList>()
+        userList = arrayListOf()
+
+        userAdapter = UserAdapter(userList)
 
 
         //Getting Current User Data
@@ -84,7 +88,6 @@ class Home : Fragment() {
 
     private fun getCurrentUserData(){
 
-        val user : FirebaseUser? = FirebaseAuth.getInstance().currentUser
         user?.let {
             val userId = user.uid
 
@@ -118,8 +121,10 @@ class Home : Fragment() {
                         val users = userSnapshot.getValue(UserList::class.java)
                         userList.add(users!!)
                     }
+
                    userAdapter = UserAdapter(userList)
                     setRecyclerView(userAdapter)
+
                 }
                 else{
                     Toast.makeText(requireContext(),"No user exists",Toast.LENGTH_SHORT).show()
@@ -134,7 +139,7 @@ class Home : Fragment() {
 
     private fun setRecyclerView(myadapter: UserAdapter) {
         binding.RecView.apply {
-            layoutManager = LinearLayoutManager(requireContext())
+            layoutManager = LinearLayoutManager(activity)
             adapter = myadapter
         }
     }

@@ -33,8 +33,6 @@ class TaskList : Fragment() {
 
 
 
-
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
@@ -48,6 +46,8 @@ class TaskList : Fragment() {
         val uId = args.userlist
 
         todolist = arrayListOf()
+
+        todolistAdapter = TodoListAdapter(todolist)
 
 
         fun getUserTodoList(){
@@ -83,7 +83,7 @@ class TaskList : Fragment() {
 
     private fun setRecyclerView(myadapter: TodoListAdapter) {
         binding.RecView.apply {
-            layoutManager = LinearLayoutManager(requireContext())
+            layoutManager = LinearLayoutManager(activity)
             adapter = myadapter
         }
     }
