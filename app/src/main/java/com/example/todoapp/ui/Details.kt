@@ -72,8 +72,8 @@ class Details : Fragment() {
 
 
             else -> {
-                val userList = UserList(name,age,dob)
                 val uId = FirebaseAuth.getInstance().currentUser!!.uid
+                val userList = UserList(name,age,dob,uId)
 
                 databaseReference.child(uId).setValue(userList).addOnCompleteListener {
                     Toast.makeText(requireContext(),"Saved Successfully",Toast.LENGTH_SHORT).show()

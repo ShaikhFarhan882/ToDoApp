@@ -41,7 +41,7 @@ class SignUp : Fragment() {
                     }
 
                     !Patterns.EMAIL_ADDRESS.matcher(email).matches() -> {
-                        Toast.makeText(requireContext(),"Invalid Email",Toast.LENGTH_SHORT).show()
+                        Toast.makeText(requireContext(), "Invalid Email", Toast.LENGTH_SHORT).show()
                     }
 
                     password.isEmpty() || password.length < 6 -> {
@@ -56,6 +56,10 @@ class SignUp : Fragment() {
                                 Toast.makeText(requireContext(),
                                     "Account created successfully",
                                     Toast.LENGTH_SHORT).show()
+                                Toast.makeText(requireContext(),
+                                    "Login to continue",
+                                    Toast.LENGTH_SHORT).show()
+
                                 signUpEmail.setText(" ")
                                 signUpPassword.setText(" ")
                             }
@@ -69,24 +73,11 @@ class SignUp : Fragment() {
 
             }
 
-
-
-
-
-
             signUpToLogin.setOnClickListener {
                 findNavController().navigate(R.id.action_signUp_to_login)
             }
 
         }
-
-
-
-
-
-
-
-
 
         return binding.root
 

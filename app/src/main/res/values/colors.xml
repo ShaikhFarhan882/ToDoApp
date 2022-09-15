@@ -15,4 +15,5 @@
     <color name="red">#FF4433</color>
     <color name="yellow">#FFD333</color>
     <color name="turquoise">#5F9EA0</color>
+    <color name="todo_bg">#7E64BC</color>
 </resources>

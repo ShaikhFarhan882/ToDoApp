@@ -30,16 +30,16 @@
 
         <com.airbnb.lottie.LottieAnimationView
             android:layout_width="300dp"
-            app:lottie_rawRes="@raw/login_banner_new"
-            app:lottie_autoPlay="true"
-            app:lottie_loop="true"
-            app:lottie_speed="1"
             android:layout_height="200dp"
             android:layout_marginTop="20dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.497"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView" />
+            app:layout_constraintTop_toBottomOf="@+id/textView"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/login_banner_new"
+            app:lottie_speed="1" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/et_login_email"
@@ -54,7 +54,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent"
+            app:startIconDrawable="@drawable/ic_email">
 
             <!--this is the actual edit text which takes the input-->
             <com.google.android.material.textfield.TextInputEditText
@@ -81,9 +82,10 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:passwordToggleEnabled="true"
             app:layout_constraintTop_toBottomOf="@id/et_login_email"
-            app:layout_constraintVertical_bias="0.127">
+            app:layout_constraintVertical_bias="0.127"
+            app:passwordToggleEnabled="true"
+            app:startIconDrawable="@drawable/ic_pwd">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/login_password"
@@ -99,23 +101,40 @@
             android:id="@+id/bt_login"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="44dp"
             android:backgroundTint="@color/turquoise"
-            android:textColor="@color/white"
             android:text="Login"
+            android:textColor="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/et_login_password" />
 
         <TextView
+            android:id="@+id/forgotPwd"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="11dp"
+            android:layout_marginEnd="32sp"
+            android:text="Forgot Password?"
+            android:textAlignment="textEnd"
+            android:textColor="@color/red"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.702" />
+
+        <TextView
             android:id="@+id/login_to_signup"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="New User? click Here"
+            android:text="New user? click here"
             android:textAlignment="center"
             android:textColor="@color/white"
-            android:textSize="22sp"
+            android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"

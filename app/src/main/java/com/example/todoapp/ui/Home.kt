@@ -37,6 +37,7 @@ class Home : Fragment() {
 
         userList = arrayListOf<UserList>()
 
+
         //Getting Current User Data
         getCurrentUserData()
 
@@ -47,6 +48,7 @@ class Home : Fragment() {
         binding.fabAddTask.setOnClickListener {
             findNavController().navigate(R.id.action_home2_to_addNewTask)
         }
+
 
 
         return binding.root

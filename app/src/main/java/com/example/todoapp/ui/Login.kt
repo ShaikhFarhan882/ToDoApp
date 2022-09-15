@@ -16,11 +16,12 @@ import com.google.firebase.database.*
 
 class Login : Fragment() {
 
-    private var _binding : FragmentLoginBinding? = null
-    private val binding : FragmentLoginBinding
-    get() = _binding!!
+    private var _binding: FragmentLoginBinding? = null
+    private val binding: FragmentLoginBinding
+        get() = _binding!!
 
-    private val auth : FirebaseAuth = FirebaseAuth.getInstance()
+
+    private val auth: FirebaseAuth = FirebaseAuth.getInstance()
     private val databaseReference: DatabaseReference =
         FirebaseDatabase.getInstance().getReference("Users")
 
@@ -46,7 +47,7 @@ class Login : Fragment() {
                 }
 
                 !Patterns.EMAIL_ADDRESS.matcher(email).matches() -> {
-                    Toast.makeText(requireContext(),"Invalid Email",Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), "Invalid Email", Toast.LENGTH_SHORT).show()
                 }
 
                 password.isEmpty() || password.length < 6 -> {
@@ -64,7 +65,7 @@ class Login : Fragment() {
                             binding.loginPassword.text!!.clear()
                             ifUserExists()
 
-                        }.addOnFailureListener{
+                        }.addOnFailureListener {
                             Toast.makeText(requireContext(),
                                 "Invalid Email or Password",
                                 Toast.LENGTH_SHORT).show()
@@ -80,12 +81,31 @@ class Login : Fragment() {
 
         }
 
+        binding.forgotPwd.setOnClickListener {
+            val email = binding.loginEmail.text.toString()
+            when{
+                email.isEmpty() -> {
+                    Toast.makeText(requireContext(),"Enter email address to continue",Toast.LENGTH_SHORT).show()
+                }
+                else -> {
+                    auth.sendPasswordResetEmail(email).addOnCompleteListener {
+                        if(it.isSuccessful){
+                            Toast.makeText(requireContext(),"Reset password link send",Toast.LENGTH_SHORT).show()
+                        }
+                        else {
+                            Toast.makeText(requireContext(),"Failed to send link",Toast.LENGTH_SHORT).show()
+                        }
+                    }
+
+                }
+            }
+        }
+
         return binding.root
 
 
-
-
     }
+
     override fun onStart() {
         super.onStart()
         val currentUser = FirebaseAuth.getInstance().currentUser
@@ -95,19 +115,18 @@ class Login : Fragment() {
     }
 
 
-    private fun ifUserExists(){
+    private fun ifUserExists() {
 
-        val user : FirebaseUser? = FirebaseAuth.getInstance().currentUser
+        val user: FirebaseUser? = FirebaseAuth.getInstance().currentUser
         user?.let {
             val userId = user.uid
 
             databaseReference.child(userId).addListenerForSingleValueEvent(object :
                 ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
-                    if(snapshot.exists()){
+                    if (snapshot.exists()) {
                         findNavController().navigate(R.id.action_login_to_home2)
-                    }
-                    else{
+                    } else {
                         findNavController().navigate(R.id.action_login_to_details)
                     }
 

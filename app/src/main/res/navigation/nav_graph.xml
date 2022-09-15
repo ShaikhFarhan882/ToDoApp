@@ -54,6 +54,9 @@
         <action
             android:id="@+id/action_home2_to_addNewTask"
             app:destination="@id/addNewTask" />
+        <action
+            android:id="@+id/action_home2_to_taskList"
+            app:destination="@id/taskList" />
     </fragment>
     <fragment
         android:id="@+id/addNewTask"
@@ -65,5 +68,15 @@
             app:destination="@id/home2"
             app:popUpTo="@id/home2"
             app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/taskList"
+        android:name="com.example.todoapp.ui.TaskList"
+        android:label="fragment_task_list"
+        tools:layout="@layout/fragment_task_list" >
+
+        <argument
+            android:name="userlist"
+            app:argType="string" />
     </fragment>
 </navigation>

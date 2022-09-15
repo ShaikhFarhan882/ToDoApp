@@ -37,14 +37,15 @@ class AddNewTask : Fragment() {
 
             AddTask.setOnClickListener {
                 val task = TodoTitle.text.toString()
+                val description = TodoDesc.text.toString()
                 when{
-                    task.isEmpty() ->{
+                    task.isEmpty() || description.isEmpty() ->{
                         Toast.makeText(requireContext(),"Task cannot be empty",Toast.LENGTH_SHORT).show()
                     }
                     else -> {
                         databaseReference = FirebaseDatabase.getInstance().getReference("TodoList").child(uId)
 
-                        val todoList = TodoList(task)
+                        val todoList = TodoList(task,description)
 
                         val key = databaseReference.push().key!!
 
