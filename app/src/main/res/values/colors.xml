@@ -10,6 +10,7 @@
     <color name="white">#FFFFFFFF</color>
 
     <color name="textcolor">#FF000000</color>
+    <color name="bordercolor">#FF000000</color>
 
     <color name="dark">#FDFDFD</color>
     <color name="gray">#727D9E</color>

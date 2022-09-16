@@ -19,7 +19,7 @@
             android:layout_height="wrap_content"
             android:text="Login"
             android:textAlignment="center"
-            android:textColor="@color/white"
+            android:textColor="@color/textcolor"
             android:textSize="38sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -64,7 +64,7 @@
                 android:layout_height="wrap_content"
                 android:inputType="text"
                 android:maxLength="35"
-                android:textColor="@color/white" />
+                android:textColor="@color/textcolor" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -93,7 +93,7 @@
                 android:layout_height="wrap_content"
                 android:inputType="textPassword"
                 android:maxLength="16"
-                android:textColor="@color/white" />
+                android:textColor="@color/textcolor" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -133,7 +133,7 @@
             android:layout_height="wrap_content"
             android:text="New user? click here"
             android:textAlignment="center"
-            android:textColor="@color/white"
+            android:textColor="@color/textcolor"
             android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

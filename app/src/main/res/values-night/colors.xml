@@ -8,6 +8,7 @@
     <color name="gray">#727D9E</color>
 
     <color name="textcolor">#FFFFFFFF</color>
+    <color name="bordercolor">#FFFFFFFF</color>
 
     <color name="green">#5AB271</color>
     <color name="red">#FF4433</color>

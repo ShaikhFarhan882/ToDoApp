@@ -27,7 +27,7 @@
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:strokeColor="@color/yellow"
+            app:strokeColor="@color/bordercolor"
             app:strokeWidth="2dp">
 
             <LinearLayout

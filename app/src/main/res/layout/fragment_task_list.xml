@@ -14,7 +14,7 @@
         tools:context=".ui.TaskList">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:layout_margin="10dp"
+            android:layout_margin="8dp"
             android:id="@+id/RecView"
             android:layout_width="0dp"
             tools:listitem="@layout/singlerow_todolist"
