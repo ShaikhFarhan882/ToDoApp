@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.EditorInfo
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.findNavController
@@ -33,7 +34,7 @@ class Login : Fragment() {
 
         val currentUser = FirebaseAuth.getInstance().currentUser
         currentUser?.let {
-            findNavController().navigate(R.id.action_login_to_home2)
+           findNavController().navigate(R.id.action_login_to_home2)
         }
     }
 
@@ -57,7 +58,9 @@ class Login : Fragment() {
             val email = binding.loginEmail.text.toString()
             val password = binding.loginPassword.text.toString()
 
-            when {
+            signIn(email,password)
+
+           /* when {
                 email.isEmpty() -> {
                     binding.loginEmail.requestFocus()
                 }
@@ -92,7 +95,7 @@ class Login : Fragment() {
                                 Toast.LENGTH_SHORT).show()
                         }
                 }
-            }
+            }*/
 
 
         }
@@ -117,7 +120,18 @@ class Login : Fragment() {
             }
         }
 
-
+      //Clicking send button from the editText.
+      binding.loginPassword.setOnEditorActionListener { v, actionId, event ->
+            return@setOnEditorActionListener when (actionId) {
+                EditorInfo.IME_ACTION_SEND -> {
+                    val email = binding.loginEmail.text.toString()
+                    val password = binding.loginPassword.text.toString()
+                    signIn(email,password)
+                    true
+                }
+                else -> false
+            }
+        }
 
         return binding.root
 
@@ -139,7 +153,6 @@ class Login : Fragment() {
         val user: FirebaseUser? = FirebaseAuth.getInstance().currentUser
         user?.let {
             val userId = user.uid
-
             databaseReference.child(userId).addListenerForSingleValueEvent(object :
                 ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
@@ -157,6 +170,48 @@ class Login : Fragment() {
             })
 
         }
+
+    }
+
+    private fun signIn (email : String, password : String){
+
+        when {
+            email.isEmpty() -> {
+                binding.loginEmail.requestFocus()
+            }
+
+            !Patterns.EMAIL_ADDRESS.matcher(email).matches() -> {
+                Toast.makeText(requireContext(), "Invalid Email", Toast.LENGTH_SHORT).show()
+            }
+
+            password.isEmpty() || password.length < 6 -> {
+                binding.loginPassword.requestFocus()
+            }
+            else -> {
+                auth.signInWithEmailAndPassword(email, password).addOnCompleteListener {
+
+                }
+                    .addOnSuccessListener {
+                        Toast.makeText(requireContext(),
+                            "Welcome",
+                            Toast.LENGTH_SHORT).show()
+                        binding.loginEmail.text!!.clear()
+                        binding.loginPassword.text!!.clear()
+                        ifUserExists()
+
+                    }.addOnFailureListener {
+                        Toast.makeText(requireContext(),
+                            "Invalid Email or Password",
+                            Toast.LENGTH_SHORT).show()
+                    }
+                    .addOnCanceledListener {
+                        Toast.makeText(requireContext(),
+                            "Something went wrong",
+                            Toast.LENGTH_SHORT).show()
+                    }
+            }
+        }
+
 
     }
 

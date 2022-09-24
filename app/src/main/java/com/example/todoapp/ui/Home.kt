@@ -5,10 +5,14 @@ import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.todoapp.R
 import com.example.todoapp.adapter.UserAdapter
 import com.example.todoapp.databinding.FragmentHomeBinding
@@ -32,6 +36,7 @@ class Home : Fragment() {
 
     private val user : FirebaseUser? = FirebaseAuth.getInstance().currentUser
 
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
@@ -40,7 +45,7 @@ class Home : Fragment() {
 
         (requireActivity() as AppCompatActivity).supportActionBar?.title = "UsersList"
         (requireActivity() as AppCompatActivity).supportActionBar?.setBackgroundDrawable(
-            ColorDrawable(getResources().getColor(R.color.purple_700)));
+            ColorDrawable(getResources().getColor(R.color.purple_700)))
 
         userList = arrayListOf()
 
@@ -58,6 +63,7 @@ class Home : Fragment() {
             findNavController().navigate(R.id.action_home2_to_addNewTask)
         }
 
+
         binding.switcher.setOnClickListener {
             if(binding.switcher.isChecked){
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
@@ -66,6 +72,7 @@ class Home : Fragment() {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
             }
         }
+
 
 
 
@@ -117,9 +124,6 @@ class Home : Fragment() {
             })
 
         }
-
-
-
     }
 
     private fun getUserList() {
@@ -145,13 +149,20 @@ class Home : Fragment() {
                 TODO("Not yet implemented")
             }
         })
+
     }
 
     private fun setRecyclerView(myadapter: UserAdapter) {
         binding.RecView.apply {
-            layoutManager = LinearLayoutManager(activity)
+            /*layoutManager = LinearLayoutManager(activity)*/
+            layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
             adapter = myadapter
         }
     }
+
+
+
+
+
 
 }

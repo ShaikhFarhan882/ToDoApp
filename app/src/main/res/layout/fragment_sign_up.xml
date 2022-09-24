@@ -1,13 +1,146 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/dark"
+            tools:context=".ui.SignUp">
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_marginTop="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Register"
+                android:textAlignment="center"
+                android:textColor="@color/textcolor"
+                app:layout_constraintBottom_toTopOf="@id/animation2"
+                android:textSize="38sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/animation2"
+                android:layout_width="200dp"
+                android:layout_height="150dp"
+                app:layout_constraintBottom_toTopOf="@+id/et_signup_email"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.497"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView2"
+                app:layout_constraintVertical_bias="0.111"
+                app:lottie_autoPlay="true"
+                app:lottie_loop="true"
+                app:lottie_rawRes="@raw/register_banner"
+                app:lottie_speed="1" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/et_signup_email"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginEnd="32dp"
+                android:hint="Email"
+                android:textColorHint="@color/turquoise"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:startIconDrawable="@drawable/ic_email">
+
+                <!--this is the actual edit text which takes the input-->
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/signUp_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="61dp"
+                    android:imeOptions="actionNext"
+                    android:inputType="text"
+                    android:maxLength="35"
+                    android:textColor="@color/textcolor" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/et_signup_password"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginEnd="32dp"
+                android:hint="Password"
+                android:textColorHint="@color/turquoise"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/et_signup_email"
+                app:layout_constraintVertical_bias="0.127"
+                app:passwordToggleEnabled="true"
+                app:startIconDrawable="@drawable/ic_pwd">
+
+                <!--this is the actual edit text which takes the input-->
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/signUp_password"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:imeOptions="actionSend"
+                    android:inputType="text"
+                    android:maxLength="16"
+                    android:textColor="@color/textcolor" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <Button
+                android:id="@+id/bt_signup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:backgroundTint="@color/turquoise"
+                android:text="Register"
+                android:textColor="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.498"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/et_signup_password" />
+
+            <TextView
+                android:id="@+id/signUp_to_Login"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Login?"
+                android:textAlignment="center"
+                android:textColor="@color/textcolor"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/bt_signup"
+                app:layout_constraintVertical_bias="0.203" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+ <!--   <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/dark"
@@ -20,22 +153,23 @@
             android:text="Register"
             android:textAlignment="center"
             android:textColor="@color/textcolor"
+            app:layout_constraintBottom_toTopOf="@id/animation2"
             android:textSize="38sp"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.055" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/animation2"
             android:layout_width="200dp"
-            android:layout_height="200dp"
-            android:layout_marginTop="20dp"
+            android:layout_height="150dp"
+            app:layout_constraintBottom_toTopOf="@+id/et_signup_email"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.497"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView2"
+            app:layout_constraintVertical_bias="0.111"
             app:lottie_autoPlay="true"
             app:lottie_loop="true"
             app:lottie_rawRes="@raw/register_banner"
@@ -48,23 +182,24 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
             android:layout_marginEnd="32dp"
-            android:textColorHint="@color/turquoise"
-            app:startIconDrawable="@drawable/ic_email"
             android:hint="Email"
+            android:textColorHint="@color/turquoise"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent"
+            app:startIconDrawable="@drawable/ic_email">
 
-            <!--this is the actual edit text which takes the input-->
+            &lt;!&ndash;this is the actual edit text which takes the input&ndash;&gt;
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/signUp_email"
+                android:layout_width="match_parent"
+                android:layout_height="61dp"
+                android:imeOptions="actionNext"
                 android:inputType="text"
                 android:maxLength="35"
-                android:textColor="@color/textcolor"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:textColor="@color/textcolor" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -78,22 +213,22 @@
             android:layout_marginEnd="32dp"
             android:hint="Password"
             android:textColorHint="@color/turquoise"
-            app:startIconDrawable="@drawable/ic_pwd"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:passwordToggleEnabled="true"
             app:layout_constraintTop_toBottomOf="@id/et_signup_email"
-            app:layout_constraintVertical_bias="0.127">
+            app:layout_constraintVertical_bias="0.127"
+            app:passwordToggleEnabled="true"
+            app:startIconDrawable="@drawable/ic_pwd">
 
-            <!--this is the actual edit text which takes the input-->
+            &lt;!&ndash;this is the actual edit text which takes the input&ndash;&gt;
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/signUp_password"
-                android:inputType="textPassword"
-                android:maxLength="16"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                android:maxLength="16"
                 android:textColor="@color/textcolor" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -104,8 +239,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
             android:backgroundTint="@color/turquoise"
-            android:textColor="@color/white"
             android:text="Register"
+            android:textColor="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
@@ -125,5 +260,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/bt_signup" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>-->
+
 </layout>
+

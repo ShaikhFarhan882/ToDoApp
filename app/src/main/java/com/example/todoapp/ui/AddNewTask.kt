@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.EditorInfo
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
@@ -44,6 +45,10 @@ class AddNewTask : Fragment() {
 
                 val task = TodoTitle.text.toString()
                 val description = TodoDesc.text.toString()
+                addTask(task,description)
+
+
+    /*
                 when {
                     task.isEmpty() || description.isEmpty() -> {
                         Toast.makeText(requireContext(), "Task cannot be empty", Toast.LENGTH_SHORT)
@@ -73,13 +78,64 @@ class AddNewTask : Fragment() {
                                 Toast.LENGTH_SHORT).show()
                         }
                     }
-                }
+                }*/
             }
 
 
         }
 
+
+        //Clicking send button from the editText.
+        binding.TodoDesc.setOnEditorActionListener { v, actionId, event ->
+            return@setOnEditorActionListener when (actionId) {
+                EditorInfo.IME_ACTION_SEND -> {
+                    val task = binding.TodoTitle.text.toString()
+                    val description = binding.TodoDesc.text.toString()
+                    addTask(task,description)
+                    true
+                }
+                else -> false
+            }
+        }
+
+
+
         return binding.root
+    }
+
+
+    private fun addTask(task : String , description : String){
+
+        when {
+            task.isEmpty() || description.isEmpty() -> {
+                Toast.makeText(requireContext(), "Task cannot be empty", Toast.LENGTH_SHORT)
+                    .show()
+            }
+            else -> {
+                databaseReference = FirebaseDatabase.getInstance().getReference("TodoList")
+
+                val key = databaseReference.push().key!!
+
+                val userid = uId
+
+                val todoList = TodoList(task, description, userid)
+
+                databaseReference.child(key).setValue(todoList).addOnCompleteListener {
+
+                }.addOnSuccessListener {
+                    Toast.makeText(requireContext(),
+                        "Task Added Successfully",
+                        Toast.LENGTH_SHORT).show()
+                    binding.TodoTitle.text.clear()
+                    binding.TodoDesc.text.clear()
+
+                }.addOnFailureListener {
+                    Toast.makeText(requireContext(),
+                        "Failed to add task",
+                        Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
     }
 
 }
