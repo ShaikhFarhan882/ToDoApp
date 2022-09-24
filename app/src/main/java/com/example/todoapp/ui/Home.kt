@@ -2,10 +2,12 @@ package com.example.todoapp.ui
 
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import androidx.fragment.app.Fragment
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
+import androidx.activity.addCallback
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
@@ -36,6 +38,25 @@ class Home : Fragment() {
 
     private val user : FirebaseUser? = FirebaseAuth.getInstance().currentUser
 
+
+    //added popup to exit app dialog
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        val callback = requireActivity().onBackPressedDispatcher.addCallback(this) {
+            val alertDialog : AlertDialog = AlertDialog.Builder(requireContext()).create()
+            alertDialog.setTitle("Exit App")
+            alertDialog.setMessage("Do you want to exit?")
+            alertDialog.setButton(AlertDialog.BUTTON_POSITIVE,"Yes"){
+                dialog, which -> requireActivity().finish()
+                dialog.dismiss()
+            }
+            alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE,"No"){
+                dialog,which -> dialog.dismiss()
+            }
+            alertDialog.show()
+        }
+
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
